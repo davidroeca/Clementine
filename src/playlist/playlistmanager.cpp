@@ -256,13 +256,14 @@ void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {
       return;
     }
     path = optionsDialog.path_type();
+    const QString custom_root = optionsDialog.custom_root();
   }
 
   settings.setValue("last_save_playlist", filename);
   settings.setValue("last_save_filter", filter);
   settings.setValue("last_save_extension", info.suffix());
 
-  Save(id == -1 ? current_id() : id, filename, path);
+  Save(id == -1 ? current_id() : id, filename, path, custom_root);
 }
 
 void PlaylistManager::Rename(int id, const QString& new_name) {

@@ -151,7 +151,8 @@ SongList PlaylistParser::LoadFromDevice(QIODevice* device,
 }
 
 void PlaylistParser::Save(const SongList& songs, const QString& filename,
-                          Playlist::Path path_type) const {
+                          Playlist::Path path_type,
+                          const QString& custom_root) const {
   QFileInfo info(filename);
 
   // Find a parser that supports this file extension
@@ -165,5 +166,7 @@ void PlaylistParser::Save(const SongList& songs, const QString& filename,
   QFile file(filename);
   file.open(QIODevice::WriteOnly);
 
-  return parser->Save(songs, &file, info.absolutePath(), path_type);
+  // TODO: Update all ParserBase subclasses with custom_root argument
+  return parser->Save(songs, &file, info.absolutePath(), path_type,
+                      custom_root);
 }

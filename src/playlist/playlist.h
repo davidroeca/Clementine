@@ -141,6 +141,7 @@ class Playlist : public QAbstractListModel {
     Path_Relative,       // Always use relative paths
     Path_Ask_User,       // Only used in preferences: to ask user which of the
                          // previous values he wants to use.
+    Path_Custom,
   };
 
   static const char* kCddaMimeType;

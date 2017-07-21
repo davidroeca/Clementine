@@ -87,7 +87,8 @@ Song ParserBase::LoadSong(const QString& filename_or_url, qint64 beginning,
 }
 
 QString ParserBase::URLOrFilename(const QUrl& url, const QDir& dir,
-                                  Playlist::Path path_type) const {
+                                  Playlist::Path path_type,
+                                  const QString& custom_root) const {
   if (url.scheme() != "file") return url.toString();
 
   const QString filename = url.toLocalFile();
@@ -95,8 +96,13 @@ QString ParserBase::URLOrFilename(const QUrl& url, const QDir& dir,
   if (path_type != Playlist::Path_Absolute && QDir::isAbsolutePath(filename)) {
     const QString relative = dir.relativeFilePath(filename);
 
-    if (!relative.startsWith("../") || path_type == Playlist::Path_Relative)
+    if (path_type == Playlist::Path_Custom) {
+      return custom_root + "/" + relative
+    } else if (!relative.startsWith("../") ||
+               path_type == Playlist::Path_Relative) {
       return relative;
+    }
+
   }
   return filename;
 }

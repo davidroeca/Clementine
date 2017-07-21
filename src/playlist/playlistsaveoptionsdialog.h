@@ -35,6 +35,7 @@ class PlaylistSaveOptionsDialog : public QDialog {
 
   void accept();
   Playlist::Path path_type() const;
+  QString custom_root() const;
 
  private:
   static const char* kSettingsGroup;

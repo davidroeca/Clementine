@@ -21,6 +21,7 @@
 #include "playlistparsers/parserbase.h"
 
 #include <QSettings>
+#include <QString>
 
 const char* PlaylistSaveOptionsDialog::kSettingsGroup =
     "PlaylistSaveOptionsDialog";
@@ -32,22 +33,36 @@ PlaylistSaveOptionsDialog::PlaylistSaveOptionsDialog(QWidget* parent)
   ui->filePaths->addItem(tr("Automatic"), Playlist::Path_Automatic);
   ui->filePaths->addItem(tr("Relative"), Playlist::Path_Relative);
   ui->filePaths->addItem(tr("Absolute"), Playlist::Path_Absolute);
+  ui->filePaths->addItem(tr("Custom"), Playlist::Path_Custom);
 }
 
 PlaylistSaveOptionsDialog::~PlaylistSaveOptionsDialog() { delete ui; }
 
 void PlaylistSaveOptionsDialog::accept() {
   if (ui->remember_user_choice->isChecked()) {
+    int choice = ui->filePaths->itemData(ui->filePaths->currentIndex()).toInt();
+    // Path_Custom is not 3, but it is at index 3
+    if (choice == 3) {
+      choice = static_cast<int>(Playlist::Path_Custom);
+    }
     QSettings s;
     s.beginGroup(Playlist::kSettingsGroup);
-    s.setValue(Playlist::kPathType,
-               ui->filePaths->itemData(ui->filePaths->currentIndex()).toInt());
+    s.setValue(Playlist::kPathType, choice);
+    s.setValue(Playlist::kCustomRoot, choice);
   }
 
   QDialog::accept();
 }
 
+QString PlaylistSaveOptionsDialog::custom_root() const {
+  // TODO: Define customRoot LineTextEdit in ui file and extract from there
+  return QString("");
+}
+
 Playlist::Path PlaylistSaveOptionsDialog::path_type() const {
-  return static_cast<Playlist::Path>(
-      ui->filePaths->itemData(ui->filePaths->currentIndex()).toInt());
+  int choice = ui->filePaths->itemData(ui->filePaths->currentIndex()).toInt();
+  if (choice == 3) {
+    return Playlist::Path_Custom;
+  }
+  return static_cast<Playlist::Path>(choice);
 }

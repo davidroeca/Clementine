@@ -53,7 +53,8 @@ class ParserBase : public QObject {
                         const QDir& dir = QDir()) const = 0;
   virtual void Save(
       const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
-      Playlist::Path path_type = Playlist::Path_Automatic) const = 0;
+      Playlist::Path path_type = Playlist::Path_Automatic,
+      QString& custom_root = QString("")) const = 0;
 
  protected:
   // Loads a song.  If filename_or_url is a URL (with a scheme other than
@@ -72,7 +73,8 @@ class ParserBase : public QObject {
   // Otherwise returns the URL as is.
   // This function should always be used when saving a playlist.
   QString URLOrFilename(const QUrl& url, const QDir& dir,
-                        Playlist::Path path_type) const;
+                        Playlist::Path path_type,
+                        const QString& custom_root = "") const;
 
  private:
   LibraryBackendInterface* library_;
