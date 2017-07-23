@@ -112,7 +112,8 @@ return_song:
 }
 
 void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
-                      Playlist::Path path_type) const {
+                      Playlist::Path path_type,
+                      const QString& custom_root) const {
   QFileInfo file;
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
@@ -129,7 +130,8 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
 
   StreamElement tracklist("trackList", &writer);
   for (const Song& song : songs) {
-    QString filename_or_url = URLOrFilename(song.url(), dir, path_type);
+    QString filename_or_url = URLOrFilename(song.url(), dir, path_type
+                                            custom_root);
 
     StreamElement track("track", &writer);
     writer.writeTextElement("location", filename_or_url);
@@ -166,7 +168,8 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
           // playlist.
           QUrl url = QUrl(art_filename);
           url.setScheme("file");  // Need to explicitly set this.
-          art_filename = URLOrFilename(url, dir, path_type).toUtf8();
+          art_filename = URLOrFilename(url, dir, path_type,
+                                       custom_root).toUtf8();
         } else {
           // Just use whatever URL was in the Song.
           art_filename = art;

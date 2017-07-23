@@ -120,12 +120,12 @@ SongList CueParser::Load(QIODevice* device, const QString& playlist_path,
           // REM DATE
         } else if (line_value.toLower() == kDate) {
           date = splitted[2];
-        
+
           // REM DISC
         } else if (line_value.toLower() == kDisc) {
           disc = splitted[2];
         }
-        
+
         // end of the header -> go into the track mode
       } else if (line_name == kTrack) {
         files++;
@@ -298,7 +298,7 @@ bool CueParser::UpdateSong(const CueEntry& entry, const QString& next_index,
   song->set_genre(entry.genre);
   song->set_year(entry.date.toInt());
   song->set_disc(entry.disc.toInt());
-  
+
   return true;
 }
 
@@ -324,7 +324,7 @@ bool CueParser::UpdateLastSong(const CueEntry& entry, Song* song) const {
   song->set_year(entry.date.toInt());
   song->set_composer(entry.PrettyComposer());
   song->set_disc(entry.disc.toInt());
-  
+
   // we don't do anything with the end here because it's already set to
   // the end of the media file (if it exists)
   song->set_beginning_nanosec(beginning);
@@ -346,7 +346,8 @@ qint64 CueParser::IndexToMarker(const QString& index) const {
 }
 
 void CueParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
-                     Playlist::Path path_type) const {
+                     Playlist::Path path_type,
+                     const QString& custom_root = "") const {
   // TODO
 }
 

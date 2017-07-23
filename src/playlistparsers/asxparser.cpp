@@ -118,7 +118,8 @@ return_song:
 }
 
 void ASXParser::Save(const SongList& songs, QIODevice* device, const QDir&,
-                     Playlist::Path path_type) const {
+                     Playlist::Path path_type,
+                     const QString& custom_root) const {
   QXmlStreamWriter writer(device);
   writer.setAutoFormatting(true);
   writer.setAutoFormattingIndent(2);

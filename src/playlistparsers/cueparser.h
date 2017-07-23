@@ -43,7 +43,7 @@ class CueParser : public ParserBase {
   static const char* kGenre;
   static const char* kDate;
   static const char* kDisc;
-  
+
   CueParser(LibraryBackendInterface* library, QObject* parent = nullptr);
 
   QString name() const { return "CUE"; }
@@ -55,7 +55,8 @@ class CueParser : public ParserBase {
   SongList Load(QIODevice* device, const QString& playlist_path = "",
                 const QDir& dir = QDir()) const;
   void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
-            Playlist::Path path_type = Playlist::Path_Automatic) const;
+            Playlist::Path path_type = Playlist::Path_Automatic,
+            const QString& custom_root = "") const;
 
  private:
   // A single TRACK entry in .cue file.

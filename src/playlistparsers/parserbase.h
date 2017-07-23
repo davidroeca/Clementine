@@ -54,7 +54,7 @@ class ParserBase : public QObject {
   virtual void Save(
       const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
       Playlist::Path path_type = Playlist::Path_Automatic,
-      QString& custom_root = QString("")) const = 0;
+      QString& custom_root = "") const = 0;
 
  protected:
   // Loads a song.  If filename_or_url is a URL (with a scheme other than

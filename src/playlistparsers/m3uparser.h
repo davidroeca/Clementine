@@ -42,7 +42,8 @@ class M3UParser : public ParserBase {
   SongList Load(QIODevice* device, const QString& playlist_path = "",
                 const QDir& dir = QDir()) const;
   void Save(const SongList& songs, QIODevice* device, const QDir& dir = QDir(),
-            Playlist::Path path_type = Playlist::Path_Automatic) const;
+            Playlist::Path path_type = Playlist::Path_Automatic,
+            const QString& custom_root = "") const;
 
  private:
   enum M3UType {
