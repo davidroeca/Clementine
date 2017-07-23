@@ -56,7 +56,11 @@ void PlaylistSaveOptionsDialog::accept() {
 
 QString PlaylistSaveOptionsDialog::custom_root() const {
   // TODO: Define customRoot LineTextEdit in ui file and extract from there
-  return QString("");
+  QString root = ui->customRoot->toPlainText().trimmed();
+  if (!root.endsWith("/")) {
+    root.append("/");
+  }
+  return root;
 }
 
 Playlist::Path PlaylistSaveOptionsDialog::path_type() const {

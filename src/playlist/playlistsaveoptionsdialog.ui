@@ -26,6 +26,20 @@
      <item row="0" column="1">
       <widget class="QComboBox" name="filePaths"/>
      </item>
+     <item row="1" column="1">
+       <widget class="LineTextEdit" name="customRoot">
+          <property name="lineWrapMode">
+           <enum>QTextEdit::NoWrap</enum>
+          </property>
+          <property name="acceptRichText">
+           <bool>false</bool>
+          </property>
+          <property name="toolTip">
+           <string>&lt;p&gt;Redefine the start to the music path in the case that you are saving the playlist for use in an external location.&lt;/p&gt;
+           </string>
+          </property>
+       </widget>
+     </item>
     </layout>
    </item>
    <item>
@@ -70,6 +84,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>LineTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>widgets/linetextedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
