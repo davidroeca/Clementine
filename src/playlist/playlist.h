@@ -158,6 +158,7 @@ class Playlist : public QAbstractListModel {
 
   static const char* kPathType;
   static const char* kWriteMetadata;
+  static const char* kCustomRoot;
 
   static const int kUndoStackSize;
   static const int kUndoItemLimit;

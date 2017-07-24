@@ -97,7 +97,7 @@ QString ParserBase::URLOrFilename(const QUrl& url, const QDir& dir,
     const QString relative = dir.relativeFilePath(filename);
 
     if (path_type == Playlist::Path_Custom) {
-      return custom_root + relative
+      return custom_root + relative;
     } else if (!relative.startsWith("../") ||
                path_type == Playlist::Path_Relative) {
       return relative;

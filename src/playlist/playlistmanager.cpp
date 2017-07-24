@@ -175,9 +175,11 @@ void PlaylistManager::Load(const QString& filename) {
 }
 
 void PlaylistManager::Save(int id, const QString& filename,
-                           Playlist::Path path_type) {
+                           Playlist::Path path_type,
+                           const QString& custom_root) {
   if (playlists_.contains(id)) {
-    parser_->Save(playlist(id)->GetAllSongs(), filename, path_type);
+    parser_->Save(playlist(id)->GetAllSongs(), filename, path_type,
+                  custom_root);
   } else {
     // Playlist is not in the playlist manager: probably save action was
     // triggered
@@ -249,7 +251,7 @@ void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {
 
   int p = settings.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
   // custom_root only matters for Playlist::Path_Custom
-  QString custom_root = "";
+  QString custom_root = QString(Playlist::kCustomRoot);
   Playlist::Path path = static_cast<Playlist::Path>(p);
   if (path == Playlist::Path_Ask_User) {
     PlaylistSaveOptionsDialog optionsDialog(nullptr);

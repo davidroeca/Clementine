@@ -77,7 +77,8 @@ class PlaylistManagerInterface : public QObject {
                    const QString& special_type = QString()) = 0;
   virtual void Load(const QString& filename) = 0;
   virtual void Save(int id, const QString& filename,
-                    Playlist::Path path_type) = 0;
+                    Playlist::Path path_type,
+                    const QString& custom_root) = 0;
   virtual void Rename(int id, const QString& new_name) = 0;
   virtual void Delete(int id) = 0;
   virtual bool Close(int id) = 0;
@@ -182,7 +183,8 @@ class PlaylistManager : public PlaylistManagerInterface {
   void New(const QString& name, const SongList& songs = SongList(),
            const QString& special_type = QString());
   void Load(const QString& filename);
-  void Save(int id, const QString& filename, Playlist::Path path_type);
+  void Save(int id, const QString& filename, Playlist::Path path_type,
+            const QString& custom_root = "");
   // Display a file dialog to let user choose a file before saving the file
   void SaveWithUI(int id, const QString& playlist_name);
   void Rename(int id, const QString& new_name);

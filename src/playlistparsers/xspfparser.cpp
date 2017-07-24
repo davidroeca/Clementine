@@ -130,7 +130,7 @@ void XSPFParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
 
   StreamElement tracklist("trackList", &writer);
   for (const Song& song : songs) {
-    QString filename_or_url = URLOrFilename(song.url(), dir, path_type
+    QString filename_or_url = URLOrFilename(song.url(), dir, path_type,
                                             custom_root);
 
     StreamElement track("track", &writer);

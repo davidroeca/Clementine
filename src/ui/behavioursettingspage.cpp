@@ -175,6 +175,8 @@ void BehaviourSettingsPage::Load() {
       break;
     case Playlist::Path_Ask_User:
       ui_->b_ask_path->setChecked(true);
+    case Playlist::Path_Custom:
+      ui_->b_custom_path->setChecked(true);
   }
   ui_->b_write_metadata->setChecked(
       s.value(Playlist::kWriteMetadata, true).toBool());
