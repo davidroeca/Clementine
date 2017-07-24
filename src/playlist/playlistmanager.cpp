@@ -248,6 +248,8 @@ void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {
   }
 
   int p = settings.value(Playlist::kPathType, Playlist::Path_Automatic).toInt();
+  // custom_root only matters for Playlist::Path_Custom
+  QString custom_root = "";
   Playlist::Path path = static_cast<Playlist::Path>(p);
   if (path == Playlist::Path_Ask_User) {
     PlaylistSaveOptionsDialog optionsDialog(nullptr);
@@ -256,7 +258,7 @@ void PlaylistManager::SaveWithUI(int id, const QString& playlist_name) {
       return;
     }
     path = optionsDialog.path_type();
-    const QString custom_root = optionsDialog.custom_root();
+    custom_root = optionsDialog.custom_root();
   }
 
   settings.setValue("last_save_playlist", filename);
