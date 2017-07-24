@@ -90,6 +90,7 @@ const char* Playlist::kSettingsGroup = "Playlist";
 
 const char* Playlist::kPathType = "path_type";
 const char* Playlist::kWriteMetadata = "write_metadata";
+const char* Playlist::kCustomRoot = "custom_root";
 
 const int Playlist::kUndoStackSize = 20;
 const int Playlist::kUndoItemLimit = 500;
