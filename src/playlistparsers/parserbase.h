@@ -75,6 +75,9 @@ class ParserBase : public QObject {
   QString URLOrFilename(const QUrl& url, const QDir& dir,
                         Playlist::Path path_type,
                         const QString& custom_root = "") const;
+  QString URLOrFilename(const Song& song, const QDir& dir,
+                        Playlist::Path path_type,
+                        const QString& custom_root = "") const;
 
  private:
   LibraryBackendInterface* library_;

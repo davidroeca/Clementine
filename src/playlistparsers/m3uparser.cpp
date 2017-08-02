@@ -125,7 +125,7 @@ void M3UParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
                          .arg(song.title());
       device->write(meta.toUtf8());
     }
-    QString out_path = URLOrFilename(song.url(), dir, path_type, custom_root);
+    QString out_path = URLOrFilename(song, dir, path_type, custom_root);
     device->write(out_path.toUtf8());
     device->write("\n");
   }

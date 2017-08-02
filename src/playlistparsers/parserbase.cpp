@@ -106,3 +106,9 @@ QString ParserBase::URLOrFilename(const QUrl& url, const QDir& dir,
   }
   return filename;
 }
+
+QString ParserBase::URLOrFilename(const Song& song, const QDir& dir,
+                                  Playlist::Path path_type,
+                                  const QString& custom_root) const {
+  return URLOrFilename(song.url(), dir, path_type, custom_root);
+}

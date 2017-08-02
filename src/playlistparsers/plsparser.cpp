@@ -71,7 +71,7 @@ void PLSParser::Save(const SongList& songs, QIODevice* device, const QDir& dir,
 
   int n = 1;
   for (const Song& song : songs) {
-    s << "File" << n << "=" << URLOrFilename(song.url(), dir, path_type,
+    s << "File" << n << "=" << URLOrFilename(song, dir, path_type,
                                              custom_root) << endl;
     s << "Title" << n << "=" << song.title() << endl;
     s << "Length" << n << "=" << song.length_nanosec() / kNsecPerSec << endl;
